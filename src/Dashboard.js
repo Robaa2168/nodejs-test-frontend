@@ -19,7 +19,8 @@ const Dashboard = () => {
         setUser(decodedToken);
       }
     }
-  },);
+  }, [localStorage.getItem('token')]);
+  
 
   if (!user) {
     return <div>Loading...</div>;

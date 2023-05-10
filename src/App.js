@@ -4,9 +4,10 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Login from './login';
 import Logout from './Logout';
-import Signup from './auth';
+import Signup from './signup';
 import Profile from './profile';
 import { Navbar, Nav } from 'react-bootstrap';
+import OtpVerification from './OtpVerification';
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/verify" element={<OtpVerification />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/" element={<Dashboard />} />

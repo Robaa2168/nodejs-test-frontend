@@ -4,6 +4,8 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
+import './signup.css';
+import OtpVerification from './OtpVerification'; // Import the OtpVerification component
 
 const UserForm = () => {
   const [firstName, setFirstName] = useState('');
@@ -25,7 +27,6 @@ const UserForm = () => {
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -38,7 +39,7 @@ const UserForm = () => {
     }
   
     try {
-      const res = await axios.post('http://localhost:3001/api/users', {
+      const res = await axios.post('http://localhost:3001/api/signup', {
         firstName,
         lastName,
         email,
@@ -49,7 +50,8 @@ const UserForm = () => {
       toast.success('Registration successful!', {
         position: 'top-right'
       });
-      navigate("/Dashboard")
+     // Navigate to "/verify" with email as state
+     navigate("/verify", { state: { email: email } });
     } catch (err) {
       console.error(err);
       if (err.response.data && err.response.data.message) {
@@ -63,13 +65,12 @@ const UserForm = () => {
       }
     }
   };
-  
 
   return (
-    <Container>
+    <Container className="user-form-container">
       <ToastContainer />
 
-      <Form onSubmit={handleSubmit}>
+      <Form className="user-form" onSubmit={handleSubmit}>
         <Form.Group controlId="firstName">
           <Form.Label>First Name:</Form.Label>
           <Form.Control
@@ -91,12 +92,11 @@ const UserForm = () => {
         <Form.Group controlId="email">
           <Form.Label>Email:</Form.Label>
           <Form.Control
-            type="email"cd 
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
-
         <Form.Group controlId="password">
           <Form.Label>Password:</Form.Label>
           <Form.Control
