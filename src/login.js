@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState ,useContext } from 'react';
+import { AuthContext } from './AuthContext';
 import axios from 'axios';
 import { Container, Form, Button } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
@@ -10,6 +11,7 @@ import Dashboard from './Dashboard';
 function LoginForm() {
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleemailChange = (event) => {
@@ -36,6 +38,7 @@ function LoginForm() {
       console.log(res.data);
   
       if (res.data.user.isVerified) {
+        login();
         toast.success('Login successful!', {
           position: 'top-right'
         });

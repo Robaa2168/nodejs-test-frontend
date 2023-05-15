@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './AuthContext'; // import the context
 
 const Logout = () => {
   const navigate = useNavigate();
+  const { logout } = useContext(AuthContext); // use the context
 
   const handleLogout = () => {
-    // Clear the token from local storage
-    localStorage.removeItem('token');
+    logout(); // update the login state
 
     // Navigate to the login page
     navigate('/login');
